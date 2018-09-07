@@ -18,7 +18,7 @@ import javax.persistence.Table;
 import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnum;
 
 @Entity
-@Table(name = "pm_usuario", catalog = "portal")
+@Table(name = "pm_usuario", catalog = "portalsescam")
 @AttributeOverride(name = "id", column = @Column(name = "idusuario"))
 public class Usuario extends ValueObject implements Serializable {
 

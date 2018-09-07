@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  */
 
 @Entity
-@Table(name="wp_posts", catalog="portal")
+@Table(name="wp_posts", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="id"))
 public class Postagem extends ValueObject implements Serializable {
 

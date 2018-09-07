@@ -50,7 +50,7 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 				+ "WHERE wp_posts.post_status = 'publish'\r\n"
 				+ "AND wp_posts.post_type = 'post'\r\n"
 				+ "AND wp_term_taxonomy.taxonomy = 'category'\r\n"
-				+ "AND wp_term_taxonomy.term_id = 7\r\n" + "ORDER BY post_date DESC limit 6;",
+				+ "AND wp_term_taxonomy.term_id = 42\r\n" + "ORDER BY post_date DESC limit 6;",
 				Postagem.class);
 
 		listaPaginacao = query.getResultList();

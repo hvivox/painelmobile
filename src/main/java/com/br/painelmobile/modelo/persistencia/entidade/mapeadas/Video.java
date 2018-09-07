@@ -15,7 +15,7 @@ import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnu
 
 
 @Entity
-@Table(name="pm_video", catalog="portal")
+@Table(name="pm_video", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idvideo"))
 public class Video extends ValueObject {	
 	

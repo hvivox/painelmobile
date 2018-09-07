@@ -13,7 +13,7 @@ import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnu
 
 
 @Entity
-@Table(name = "pm_parceiro", catalog = "portal")
+@Table(name = "pm_parceiro", catalog = "portalsescam")
 @AttributeOverride(name = "id", column = @Column(name = "idparceiro"))
 public class Parceiro extends ValueObject {
 
