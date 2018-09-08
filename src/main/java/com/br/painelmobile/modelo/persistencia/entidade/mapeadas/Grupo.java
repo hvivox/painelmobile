@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="pm_grupo", catalog="portal")
+@Table(name="pm_grupo", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idgrupo"))
 public class Grupo extends ValueObject implements Serializable {
 

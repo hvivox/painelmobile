@@ -15,7 +15,7 @@ import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnu
 
 
 @Entity
-@Table(name="pm_evento", catalog="portal")
+@Table(name="pm_evento", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idevento"))
 public class Evento extends ValueObject{
 

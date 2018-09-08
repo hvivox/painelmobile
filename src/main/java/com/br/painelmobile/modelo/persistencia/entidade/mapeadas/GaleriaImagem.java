@@ -21,7 +21,7 @@ import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnu
 
 
 @Entity
-@Table(name="pm_galeriaImagem", catalog="portal")
+@Table(name="pm_galeriaImagem", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idGaleriaImagem"))
 public class GaleriaImagem extends ValueObject{
 	

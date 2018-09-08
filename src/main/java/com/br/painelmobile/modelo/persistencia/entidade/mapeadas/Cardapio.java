@@ -11,7 +11,7 @@ import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnu
 
 
 @Entity
-@Table(name="pm_cardapio", catalog="portal")
+@Table(name="pm_cardapio", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idcardapio"))
 public class Cardapio extends ValueObject{
 	

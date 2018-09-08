@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name="pm_mensagem", catalog="portal")
+@Table(name="pm_mensagem", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idmensagem"))
 public class Mensagem extends ValueObject {
 	

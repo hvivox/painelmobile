@@ -11,7 +11,7 @@ import org.hibernate.annotations.ForeignKey;
 
 
 @Entity
-@Table(name="pm_imagem", catalog="portal")
+@Table(name="pm_imagem", catalog="portalsescam")
 @AttributeOverride(name="id", column=@Column(name="idimagem"))
 public class Imagem extends ValueObject {
 

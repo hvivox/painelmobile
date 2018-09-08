@@ -34,7 +34,7 @@
 <!-- 			<property name="javax.persistence.jdbc.password" value="sescdr@123" />		 -->
 			
 			
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.5.145:3306/portal?autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;verifyServerCertificate=false&amp;useSSL=false" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.5.145:3306/portalsescam?autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;verifyServerCertificate=false&amp;useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="painelmobile"/>
 			<property name="javax.persistence.jdbc.password" value="pm#157" />		
 			<!-- true or false. Setting which indicates whether or not the new IdentifierGenerator implementations are used for AUTO, TABLE -->
