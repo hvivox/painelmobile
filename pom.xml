@@ -47,7 +47,8 @@
 		<primefaces.theme.version>1.0.10</primefaces.theme.version>
 		<omnifaces.version>2.1</omnifaces.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
-		<jsoup.version>1.9.2</jsoup.version>
+<!-- 		<jsoup.version>1.9.2</jsoup.version> -->
+		<jsoup.version>1.12.1</jsoup.version>
 		<mysql.version>5.1.38</mysql.version>
 		<hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
 
@@ -254,6 +255,13 @@
 
 
 		<!-- Parser html - consegue extrair informações do html -->
+<!-- 	
+		<dependency>		
+			  <groupId>org.jsoup</groupId>
+			  <artifactId>jsoup</artifactId>			  
+			  <version>${jsoup.version}</version>			  
+		</dependency>
+ -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
@@ -261,8 +269,7 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jsoup-1.9.2.jar</systemPath>
 		</dependency>
-
-
+	
 		<!-- Abstração para envio de e-mails -->
 		<dependency>
 			<groupId>com.outjected</groupId>
@@ -390,7 +397,10 @@
 			<url>http://download.java.net/maven/1</url>
 		</repository>
 
-
+		<repository>
+			<id>Central Marvem</id>
+			<url>https://jsoup.org/</url>
+		</repository>
 
 		<!-- JBoss Releases -->
 		<repository>
@@ -417,8 +427,9 @@
 			<id>Central Marvem</id>
 			<url>http://central.maven.org/maven2/</url>
 		</repository>
-
-
+		
+		
+	
 	</repositories>
 
 </project>

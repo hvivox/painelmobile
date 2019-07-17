@@ -63,7 +63,7 @@ public class WSPostagem implements Serializable {
 			// percorre a lista para personalizar as informações
 			for (Postagem postagem : listaPostagens) {
 				DTONoticia noticia = new DTONoticia();
-
+				
 				/*SOLUÇÃO PROBLEMA DE CODIFICAÇÃO DA INFORMAÇÃO
 				 * os dois campos abaixo são do tipo byte[] pois só assim é
 				 * possível converter do formato errado do banco para UTF-8
@@ -102,6 +102,76 @@ public class WSPostagem implements Serializable {
 	}
 
 
+	
+	
+	
+	/**
+	 * classe utilizada para retornar apenas as 6 ultimas noticias
+	 * 
+	 * @return List<noticias>
+	 * @throws WSTratamentoExcecaoGeral
+	 * @throws ConsultaInvalidaException
+	 * @throws ObjetoNaoEncontradoException
+	 */
+	@GET
+	@Path("listar-ultimos-destaques")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getListarUltimosDestaques() throws WSTratamentoExcecaoGeral {
+		List<Postagem> listaPostagens;
+
+		try {
+			listaPostagens = servicoPostagem.buscarPostagemPorQuantidade(qtdDeNoticias);
+
+			// percorre a lista para personalizar as informações
+			for (Postagem postagem : listaPostagens) {
+				DTONoticia noticia = new DTONoticia();
+				
+				/*SOLUÇÃO PROBLEMA DE CODIFICAÇÃO DA INFORMAÇÃO
+				 * os dois campos abaixo são do tipo byte[] pois só assim é
+				 * possível converter do formato errado do banco para UTF-8
+				 * Abaixo os byte estão sendo convertido em String, é necessário
+				 * setar esta informação
+				 * useUnicode=yes&amp;characterEncoding=UTF-8"na string de
+				 * conexão do persistence.xml para informar ao sistema qual o
+				 * charset será utilizado
+				 */
+				
+				// String titulo = new String(postagem.getPostTitle(),"UTF-8");
+				String titulo = new String(postagem.getPostTitle(),"UTF-8");
+				String conteudo = new String(postagem.getPostContent(),"UTF-8");
+				
+				noticia.setId(postagem.getId());
+				noticia.setTitulo(titulo);
+				noticia.setUriImagem(definirUriImagem(conteudo));
+				noticia.setParteTexto(formatarParteDoTexto(conteudo));
+				//noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
+				noticia.setHtmlTexto(ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(conteudo));
+				
+				listaNoticia.add(noticia);
+
+			}
+
+			dtoListaDeNoticias.setListaNoticias(listaNoticia);
+
+			return Response.ok(dtoListaDeNoticias).type(MediaType.APPLICATION_JSON).build();
+
+		} catch (Exception e) {
+			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn(
+					e.getCause() + "\n Mensagem Erro: " + e.getMessage());
+
+			throw new WSTratamentoExcecaoGeral(
+					"{\"status\":\"400\",\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
+		}
+
+	}
+	
+			
+	
+	
+	
+	
+	
 	/**
 	 * Formatar texto para retirar html e reduzir o numero de caracteres para
 	 * 200
@@ -110,12 +180,13 @@ public class WSPostagem implements Serializable {
 	 * @return
 	 */
 	private String formatarParteDoTexto(String parteTexto) {
-		String textoProcessado = ParserHtml.converterHtmlEmTexto(parteTexto);
+		String textoProcessado = ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(parteTexto);
+		//String textoProcessado = ParserHtml.converterHtmlEmTexto(parteTexto);
 		// caso o texto tenha menos que 200(nao retorna nulo) caracteres ou
 		// nenhum (_) o sistema irá tratar
 		return (StringUtils.defaultIfEmpty(StringUtils.substring(textoProcessado, 0, 200), "_") + "....");
 	}
-
+	
 
 	/**
 	 * utilizado para definir a uri de uma unica imagem mesmo se houver mais de
