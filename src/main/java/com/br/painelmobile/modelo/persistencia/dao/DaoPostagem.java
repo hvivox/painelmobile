@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.br.painelmobile.controle.webserver.excecoes.WSTratamentoExcecaoGeral;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Postagem;
+import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.PostagemComCategoria;
 
 public class DaoPostagem extends DataAccessObject<Postagem> {
 
@@ -47,14 +48,47 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 				+ "FROM wp_posts\r\n"
 				+ "LEFT JOIN wp_term_relationships ON (wp_posts.ID = wp_term_relationships.object_id)\r\n"
 				+ "LEFT JOIN wp_term_taxonomy ON (wp_term_relationships.term_taxonomy_id = wp_term_taxonomy.term_taxonomy_id)\r\n"
-				+ "WHERE wp_posts.post_status = 'publish'\r\n"
+				+ "WHERE wp_posts.post_status = 'publish'\r\n" 
 				+ "AND wp_posts.post_type = 'post'\r\n"
 				+ "AND wp_term_taxonomy.taxonomy = 'category'\r\n"
 				+ "AND wp_term_taxonomy.term_id = 42\r\n" + "ORDER BY post_date DESC limit 6;",
 				Postagem.class);
 
 		listaPaginacao = query.getResultList();
+			
+		
+		if (listaPaginacao == null || listaPaginacao.size() == 0
+				|| !(listaPaginacao instanceof Object)) {
+			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn("Não foi encontradas mensagens.....");
+			throw new WSTratamentoExcecaoGeral(
+					"{\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
+		}
 
+		return listaPaginacao;
+	}
+	
+	
+	
+	/**
+	 * @param qtdLinhasExbir numero de linhas a ser listada
+	 * @return list de Postagem
+	 * @throws WSTratamentoExcecaoGeral verifica se a consulta retorna vazia
+	 */
+	@SuppressWarnings("unchecked")
+	public List<PostagemComCategoria> buscarPostagemComCategoriaPorQuantidade (int qtdLinhasExbir)
+			throws WSTratamentoExcecaoGeral {
+
+		List<PostagemComCategoria> listaPaginacao = null;
+		Query query = getManager().createNamedQuery("postagemComCategoria");
+
+		listaPaginacao = query.getResultList();
+		
+		for (PostagemComCategoria postagemComCategoria : listaPaginacao) {
+			
+			System.out.println( postagemComCategoria.toString() );
+		}
+		
+		
 		if (listaPaginacao == null || listaPaginacao.size() == 0
 				|| !(listaPaginacao instanceof Object)) {
 			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn("Não foi encontradas mensagens.....");
@@ -65,6 +99,12 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 		return listaPaginacao;
 	}
 
+	
+	
+	
+
+	
+	
 	/**
 	 * @param qtdLinhasExbir numero de linhas a ser listada
 	 * @return list de Postagem

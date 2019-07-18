@@ -20,6 +20,8 @@
 		<class>com.br.painelmobile.modelo.persistencia.entidade.mapeadas.ValueObject</class>
 		<class>com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Video</class>
 		
+		
+		
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 		
 		<properties>

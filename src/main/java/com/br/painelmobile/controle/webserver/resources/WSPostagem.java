@@ -22,6 +22,7 @@ import com.br.painelmobile.modelo.negocios.servico.ServicePostagem;
 import com.br.painelmobile.modelo.persistencia.entidade.dto.DTOListaDeNoticia;
 import com.br.painelmobile.modelo.persistencia.entidade.dto.DTONoticia;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Postagem;
+import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.PostagemComCategoria;
 import com.br.painelmobile.util.manipularDados.ParserHtml;
 
 @Named
@@ -118,13 +119,13 @@ public class WSPostagem implements Serializable {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getListarUltimosDestaques() throws WSTratamentoExcecaoGeral {
-		List<Postagem> listaPostagens;
+		List<PostagemComCategoria> listaPostagens;
 
 		try {
-			listaPostagens = servicoPostagem.buscarPostagemPorQuantidade(qtdDeNoticias);
+			listaPostagens = servicoPostagem.buscarPostagemComCategoriaPorQuantidade(qtdDeNoticias);
 
 			// percorre a lista para personalizar as informações
-			for (Postagem postagem : listaPostagens) {
+			for (PostagemComCategoria postagemComCategoria : listaPostagens) {
 				DTONoticia noticia = new DTONoticia();
 				
 				/*SOLUÇÃO PROBLEMA DE CODIFICAÇÃO DA INFORMAÇÃO
@@ -138,10 +139,10 @@ public class WSPostagem implements Serializable {
 				 */
 				
 				// String titulo = new String(postagem.getPostTitle(),"UTF-8");
-				String titulo = new String(postagem.getPostTitle(),"UTF-8");
-				String conteudo = new String(postagem.getPostContent(),"UTF-8");
+				String titulo = new String(postagemComCategoria.getTitulo(),"UTF-8");
+				String conteudo = new String(postagemComCategoria.getConteudo(),"UTF-8");
 				
-				noticia.setId(postagem.getId());
+				noticia.setId(postagemComCategoria.getIdpostagem());
 				noticia.setTitulo(titulo);
 				noticia.setUriImagem(definirUriImagem(conteudo));
 				noticia.setParteTexto(formatarParteDoTexto(conteudo));
