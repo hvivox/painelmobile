@@ -8,7 +8,7 @@ public class DTONoticia {
 	private String uriImagem;
 	private String parteTexto;
 	private String htmlTexto;
-	
+	private String categoria;
 		
 	
 	public DTONoticia(){
@@ -62,6 +62,16 @@ public class DTONoticia {
 	}
 
 
+	public String getCategoria() {
+		return categoria;
+	}
 
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+
+	
 	
 }
