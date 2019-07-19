@@ -69,7 +69,7 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 	
 	
 	
-	/**
+	/**@method utilizado para mostrar postagens com categoria e 
 	 * @param qtdLinhasExbir numero de linhas a ser listada
 	 * @return list de Postagem
 	 * @throws WSTratamentoExcecaoGeral verifica se a consulta retorna vazia
@@ -82,12 +82,7 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 		Query query = getManager().createNamedQuery("postagemComCategoria");
 
 		listaPaginacao = query.getResultList();
-		
-		for (PostagemComCategoria postagemComCategoria : listaPaginacao) {
 			
-			System.out.println( postagemComCategoria.toString() );
-		}
-		
 		
 		if (listaPaginacao == null || listaPaginacao.size() == 0
 				|| !(listaPaginacao instanceof Object)) {

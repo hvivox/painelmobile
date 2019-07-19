@@ -108,7 +108,8 @@ public class WSPostagem implements Serializable {
 	
 	
 	/**
-	 * classe utilizada para retornar apenas as 6 ultimas noticias
+	 * classe utilizada para retornar apenas as 6 ultimas noticias para 
+	 * servir o novo app
 	 * 
 	 * @return List<noticias>
 	 * @throws WSTratamentoExcecaoGeral
@@ -127,24 +128,15 @@ public class WSPostagem implements Serializable {
 
 			// percorre a lista para personalizar as informações
 			for (PostagemComCategoria postagemComCategoria : listaPostagens) {
-				DTONoticia noticia = new DTONoticia();
 				
-				/*SOLUÇÃO PROBLEMA DE CODIFICAÇÃO DA INFORMAÇÃO
-				 * os dois campos abaixo são do tipo byte[] pois só assim é
-				 * possível converter do formato errado do banco para UTF-8
-				 * Abaixo os byte estão sendo convertido em String, é necessário
-				 * setar esta informação
-				 * useUnicode=yes&amp;characterEncoding=UTF-8"na string de
-				 * conexão do persistence.xml para informar ao sistema qual o
-				 * charset será utilizado
-				 */
+				DTONoticia noticia = new DTONoticia();				
 				
-				// String titulo = new String(postagem.getPostTitle(),"UTF-8");
 				String titulo = new String(postagemComCategoria.getTitulo(),"UTF-8");
 				String conteudo = new String(postagemComCategoria.getConteudo(),"UTF-8");
 				
 				noticia.setId(postagemComCategoria.getIdpostagem());
 				noticia.setTitulo(titulo);
+				noticia.setLinkPublicacao( postagemComCategoria.getLinkDaPostagem() );
 				noticia.setUriImagem(definirUriImagem(conteudo));
 				noticia.setParteTexto(formatarParteDoTexto(conteudo));
 				//noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));

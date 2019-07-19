@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 	query=" SELECT" + 
 			"       wp_posts.id As idPostagem," + 
 			"       wp_posts.post_title as titulo," + 
+			"       wp_posts.guid as linkDaPostagem," +
 			"       wp_posts.post_content as conteudo," + 
 			"       wp_terms.name AS categoria" + 		
 			"    FROM" + 
@@ -61,6 +62,7 @@ import javax.persistence.TemporalType;
 					columns= {
 							@ColumnResult(name="idPostagem",  type=Integer.class),
 							@ColumnResult(name="titulo", type=byte[].class ),
+							@ColumnResult(name="linkDaPostagem" ),
 							@ColumnResult(name="conteudo", type=byte[].class),
 							@ColumnResult(name="categoria")
 					}

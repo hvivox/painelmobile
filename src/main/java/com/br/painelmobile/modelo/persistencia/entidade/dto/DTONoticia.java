@@ -5,10 +5,12 @@ public class DTONoticia {
 	
 	private Integer id;
 	private String titulo;
+	private String linkPublicacao;
 	private String uriImagem;
 	private String parteTexto;
 	private String htmlTexto;
 	private String categoria;
+	
 		
 	
 	public DTONoticia(){
@@ -29,6 +31,16 @@ public class DTONoticia {
 	}
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+
+	public String getLinkPublicacao() {
+		return linkPublicacao;
+	}
+
+
+	public void setLinkPublicacao(String linkPublicacao) {
+		this.linkPublicacao = linkPublicacao;
 	}
 
 
