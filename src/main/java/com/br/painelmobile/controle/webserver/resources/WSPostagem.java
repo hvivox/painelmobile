@@ -33,6 +33,7 @@ public class WSPostagem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// defini a quantidade noticias que será mostradas ou listadas
 	private static final int qtdDeNoticias = 6;
+	private static final int idPostagemCardapio = 1301;
 	private List<DTONoticia> listaNoticia = new ArrayList<DTONoticia>();
 
 	private DTOListaDeNoticia dtoListaDeNoticias = new DTOListaDeNoticia();
@@ -161,6 +162,43 @@ public class WSPostagem implements Serializable {
 	}
 	
 			
+	
+	
+	
+	@GET
+	@Path("exibir-cardapio-do-dia")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getExibirCardapioDoDia() throws WSTratamentoExcecaoGeral {
+		DTONoticia noticia = new DTONoticia();
+		Postagem postagem;
+
+		try {
+			postagem = servicoPostagem.recuperarPorId(idPostagemCardapio);			
+			
+			// String titulo = new String(postagem.getPostTitle(),"UTF-8");
+			String titulo = new String(postagem.getPostTitle(),"UTF-8");
+			String conteudo = new String(postagem.getPostContent(),"UTF-8");
+			
+			noticia.setId(postagem.getId());
+			noticia.setTitulo(titulo);
+			noticia.setLinkPublicacao( postagem.getGuid() );
+			noticia.setUriImagem(definirUriImagem(conteudo));
+			noticia.setParteTexto(formatarParteDoTexto(conteudo));
+			noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
+			
+			
+			return Response.ok(noticia).type(MediaType.APPLICATION_JSON).build();
+
+		} catch (Exception e) {
+			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn(
+					e.getCause() + "\n Mensagem Erro: " + e.getMessage());
+
+			throw new WSTratamentoExcecaoGeral(
+					"{\"status\":\"400\",\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
+		}
+
+	}
 	
 	
 	

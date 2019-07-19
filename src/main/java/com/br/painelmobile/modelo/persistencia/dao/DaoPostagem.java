@@ -10,6 +10,8 @@ import javax.persistence.Query;
 import org.apache.commons.logging.LogFactory;
 
 import com.br.painelmobile.controle.webserver.excecoes.WSTratamentoExcecaoGeral;
+import com.br.painelmobile.modelo.persistencia.entidade.enums.EstatusEntidadeEnum;
+import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Cardapio;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Postagem;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.PostagemComCategoria;
 
@@ -96,7 +98,7 @@ public class DaoPostagem extends DataAccessObject<Postagem> {
 
 	
 	
-	
+
 
 	
 	
