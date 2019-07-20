@@ -27,7 +27,7 @@ public class WSMensagem  {
 
 
 	public WSMensagem() {
-
+		
 	}
 
 

@@ -13,6 +13,7 @@ import com.br.painelmobile.modelo.negocios.excecao.ObjetoTransienteSendoPersisti
 import com.br.painelmobile.modelo.negocios.excecao.campoObrigatorioNaoPreenchido;
 import com.br.painelmobile.modelo.persistencia.dao.DaoPostagem;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Postagem;
+import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.PostagemComCategoria;
 import com.br.painelmobile.util.cdi.qualifier.Transactional;
 
 
@@ -40,6 +41,10 @@ public class ServicePostagem implements Serializable{
 		return daoPostagem.buscarPostagemPorQuantidade(qtdLinhasExbir);		
 	}
 
+	
+	public List<PostagemComCategoria> buscarPostagemComCategoriaPorQuantidade(int qtdLinhasExbir) throws WSTratamentoExcecaoGeral {
+		return daoPostagem.buscarPostagemComCategoriaPorQuantidade(qtdLinhasExbir);		
+	}
 	
 	
 	public Postagem recuperarPorId(Integer id) throws ObjetoNaoEncontradoException, EntityIdNuloException{

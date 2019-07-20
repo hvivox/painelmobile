@@ -22,6 +22,7 @@ import com.br.painelmobile.modelo.negocios.servico.ServicePostagem;
 import com.br.painelmobile.modelo.persistencia.entidade.dto.DTOListaDeNoticia;
 import com.br.painelmobile.modelo.persistencia.entidade.dto.DTONoticia;
 import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Postagem;
+import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.PostagemComCategoria;
 import com.br.painelmobile.util.manipularDados.ParserHtml;
 
 @Named
@@ -32,6 +33,7 @@ public class WSPostagem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	// defini a quantidade noticias que será mostradas ou listadas
 	private static final int qtdDeNoticias = 6;
+	private static final int idPostagemCardapio = 1301;
 	private List<DTONoticia> listaNoticia = new ArrayList<DTONoticia>();
 
 	private DTOListaDeNoticia dtoListaDeNoticias = new DTOListaDeNoticia();
@@ -63,7 +65,7 @@ public class WSPostagem implements Serializable {
 			// percorre a lista para personalizar as informações
 			for (Postagem postagem : listaPostagens) {
 				DTONoticia noticia = new DTONoticia();
-
+				
 				/*SOLUÇÃO PROBLEMA DE CODIFICAÇÃO DA INFORMAÇÃO
 				 * os dois campos abaixo são do tipo byte[] pois só assim é
 				 * possível converter do formato errado do banco para UTF-8
@@ -83,6 +85,7 @@ public class WSPostagem implements Serializable {
 				noticia.setUriImagem(definirUriImagem(conteudo));
 				noticia.setParteTexto(formatarParteDoTexto(conteudo));
 				noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
+				
 				listaNoticia.add(noticia);
 
 			}
@@ -102,6 +105,105 @@ public class WSPostagem implements Serializable {
 	}
 
 
+	
+	
+	
+	/**
+	 * classe utilizada para retornar apenas as 6 ultimas noticias para 
+	 * servir o novo app
+	 * 
+	 * @return List<noticias>
+	 * @throws WSTratamentoExcecaoGeral
+	 * @throws ConsultaInvalidaException
+	 * @throws ObjetoNaoEncontradoException
+	 */
+	@GET
+	@Path("listar-ultimos-destaques")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getListarUltimosDestaques() throws WSTratamentoExcecaoGeral {
+		List<PostagemComCategoria> listaPostagens;
+
+		try {
+			listaPostagens = servicoPostagem.buscarPostagemComCategoriaPorQuantidade(qtdDeNoticias);
+
+			// percorre a lista para personalizar as informações
+			for (PostagemComCategoria postagemComCategoria : listaPostagens) {
+				
+				DTONoticia noticia = new DTONoticia();				
+				
+				String titulo = new String(postagemComCategoria.getTitulo(),"UTF-8");
+				String conteudo = new String(postagemComCategoria.getConteudo(),"UTF-8");
+				
+				noticia.setId(postagemComCategoria.getIdpostagem());
+				noticia.setTitulo(titulo);
+				noticia.setLinkPublicacao( postagemComCategoria.getLinkDaPostagem() );
+				noticia.setUriImagem(definirUriImagem(conteudo));
+				noticia.setParteTexto(formatarParteDoTexto(conteudo));
+				//noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
+				noticia.setHtmlTexto(ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(conteudo));
+				noticia.setCategoria(postagemComCategoria.getCategoria());
+				listaNoticia.add(noticia);
+
+			}
+
+			dtoListaDeNoticias.setListaNoticias(listaNoticia);
+
+			return Response.ok(dtoListaDeNoticias).type(MediaType.APPLICATION_JSON).build();
+
+		} catch (Exception e) {
+			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn(
+					e.getCause() + "\n Mensagem Erro: " + e.getMessage());
+
+			throw new WSTratamentoExcecaoGeral(
+					"{\"status\":\"400\",\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
+		}
+
+	}
+	
+			
+	
+	
+	
+	@GET
+	@Path("exibir-cardapio-do-dia")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getExibirCardapioDoDia() throws WSTratamentoExcecaoGeral {
+		DTONoticia noticia = new DTONoticia();
+		Postagem postagem;
+
+		try {
+			postagem = servicoPostagem.recuperarPorId(idPostagemCardapio);			
+			
+			// String titulo = new String(postagem.getPostTitle(),"UTF-8");
+			String titulo = new String(postagem.getPostTitle(),"UTF-8");
+			String conteudo = new String(postagem.getPostContent(),"UTF-8");
+			
+			noticia.setId(postagem.getId());
+			noticia.setTitulo(titulo);
+			noticia.setLinkPublicacao( postagem.getGuid() );
+			noticia.setUriImagem(definirUriImagem(conteudo));
+			noticia.setParteTexto(formatarParteDoTexto(conteudo));
+			noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
+			
+			
+			return Response.ok(noticia).type(MediaType.APPLICATION_JSON).build();
+
+		} catch (Exception e) {
+			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn(
+					e.getCause() + "\n Mensagem Erro: " + e.getMessage());
+
+			throw new WSTratamentoExcecaoGeral(
+					"{\"status\":\"400\",\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
+		}
+
+	}
+	
+	
+	
+	
+	
 	/**
 	 * Formatar texto para retirar html e reduzir o numero de caracteres para
 	 * 200
@@ -110,12 +212,13 @@ public class WSPostagem implements Serializable {
 	 * @return
 	 */
 	private String formatarParteDoTexto(String parteTexto) {
-		String textoProcessado = ParserHtml.converterHtmlEmTexto(parteTexto);
+		String textoProcessado = ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(parteTexto);
+		//String textoProcessado = ParserHtml.converterHtmlEmTexto(parteTexto);
 		// caso o texto tenha menos que 200(nao retorna nulo) caracteres ou
 		// nenhum (_) o sistema irá tratar
 		return (StringUtils.defaultIfEmpty(StringUtils.substring(textoProcessado, 0, 200), "_") + "....");
 	}
-
+	
 
 	/**
 	 * utilizado para definir a uri de uma unica imagem mesmo se houver mais de
