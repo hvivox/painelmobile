@@ -14,8 +14,8 @@
 				<version>3.3</version>
 
 				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -47,8 +47,8 @@
 		<primefaces.theme.version>1.0.10</primefaces.theme.version>
 		<omnifaces.version>2.1</omnifaces.version>
 		<commons-lang3.version>3.4</commons-lang3.version>
-<!-- 		<jsoup.version>1.9.2</jsoup.version> -->
-		<jsoup.version>1.12.1</jsoup.version>
+		<jsoup.version>1.9.2</jsoup.version>
+<!-- 		<jsoup.version>1.12.1</jsoup.version> -->
 		<mysql.version>5.1.38</mysql.version>
 		<hibernate-validator.version>5.0.1.Final</hibernate-validator.version>
 
