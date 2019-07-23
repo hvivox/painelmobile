@@ -189,37 +189,6 @@ public class ParserHtml {
 	
 	
 	
-	/** @param htmlFragmento
-	 * @return */
-	/**
-	 * @param htmlFragmento
-	 * @return
-	 */
-	public static String obterCabecalhoCardapio(String htmlFragmento) {
-		Document doc;
-		String htmlSemColchetes;
-		
-		
-		//TROCA COLCHETES POR MAIOR E MENOR
-		htmlSemColchetes = htmlFragmento.replaceAll("\\[", "<");
-		htmlSemColchetes = htmlSemColchetes.replaceAll("\\]", ">");
-		doc = Jsoup.parseBodyFragment(htmlSemColchetes);// ler o fragmento do html
-		
-		Elements opcao = doc.select("row").parents();
-		
-		
-	
-	
-		return opcao.html();
-	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

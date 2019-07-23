@@ -9,10 +9,12 @@ public class DTOCardapio implements Serializable {
 
 	private static final long serialVersionUID = -8863989366948427335L;
 	private List<Cardapio> cardapio;
-
+	
 
 	public DTOCardapio() {
 	}
+
+
 
 
 	public DTOCardapio(List<Cardapio> cardapio) {
@@ -29,7 +31,9 @@ public class DTOCardapio implements Serializable {
 		this.cardapio = cardapio;
 	}
 
-
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

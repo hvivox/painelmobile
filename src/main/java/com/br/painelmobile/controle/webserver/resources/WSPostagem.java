@@ -91,7 +91,7 @@ public class WSPostagem implements Serializable {
 			}
 
 			dtoListaDeNoticias.setListaNoticias(listaNoticia);
-
+						
 			return Response.ok(dtoListaDeNoticias).type(MediaType.APPLICATION_JSON).build();
 
 		} catch (Exception e) {
