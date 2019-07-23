@@ -279,8 +279,7 @@ public class ParserHtml {
 		//ALTERA O SHORTCODE DO HTML
 		String htmlSemShortCode;
 		htmlSemShortCode = htmlFragmento.replaceAll("\\[", "<");
-		htmlSemShortCode = htmlSemShortCode.replaceAll("\\]", ">");
-		
+		htmlSemShortCode = htmlSemShortCode.replaceAll("\\]", ">");		
 		
 		String cabecalho = ObterCabecalhoCardapio(htmlSemShortCode);
 		String rodape = ObterRodapeCardapio(htmlSemShortCode);
@@ -289,7 +288,7 @@ public class ParserHtml {
 		dtoCardapioDetalhado.setCabecalho(cabecalho);
 		dtoCardapioDetalhado.setRodape(rodape);
 		dtoCardapioDetalhado.setListaComposicaoCardapio(listaComposicaoCardapio);
-		
+	
 		
 		return dtoCardapioDetalhado;
 		

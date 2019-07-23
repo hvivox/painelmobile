@@ -78,8 +78,7 @@ public class WSPostagem implements Serializable {
 				
 				// String titulo = new String(postagem.getPostTitle(),"UTF-8");
 				String titulo = new String(postagem.getPostTitle(),"UTF-8");
-				String conteudo = new String(postagem.getPostContent(),"UTF-8");
-				
+				String conteudo = new String(postagem.getPostContent(),"UTF-8");				
 				noticia.setId(postagem.getId());
 				noticia.setTitulo(titulo);
 				noticia.setUriImagem(definirUriImagem(conteudo));

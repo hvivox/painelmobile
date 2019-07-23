@@ -90,13 +90,19 @@ public class WSCardapio {
 	public Response getExibirCardapioDoDia() throws WSTratamentoExcecaoGeral {
 		DTOCardapioDetalhado cardapioDetalhado = new DTOCardapioDetalhado();
 		Postagem postagem;
-
+		
 		try {
+			
+			// busca a informacao do banco
+			cardapio = serviceCardapio.consultaUltimoRegistroAtivo();
 			postagem = servicoPostagem.recuperarPorId(idPostagemCardapio);			
+
 			
 			//CONVERTE A POSTAGEM DE BIT PARA TEXT
 			String conteudo = new String(postagem.getPostContent(),"UTF-8");
+						
 			cardapioDetalhado = ParserHtml.obterInformacoesDoCardapioWordpress(conteudo);
+			cardapioDetalhado.setCardapio(cardapio);
 			
 			
 			return Response.ok(cardapioDetalhado).type(MediaType.APPLICATION_JSON).build();

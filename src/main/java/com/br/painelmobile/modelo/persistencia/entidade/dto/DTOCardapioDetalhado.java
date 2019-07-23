@@ -8,11 +8,11 @@ import com.br.painelmobile.modelo.persistencia.entidade.mapeadas.Cardapio;
 public class DTOCardapioDetalhado implements Serializable {
 
 	private static final long serialVersionUID = -8863989366948427335L;
-	private Cardapio cardapio;
-	private String cabecalho;
-	private String rodape;	
-	private List<DTOComposicaoCardapio> listaComposicaoCardapio; 
 	
+	private String cabecalho;
+	private String rodape;		
+	private List<DTOComposicaoCardapio> listaComposicaoCardapio; 
+	private Cardapio cardapio;
 	
 	
 	public DTOCardapioDetalhado() {
@@ -20,14 +20,7 @@ public class DTOCardapioDetalhado implements Serializable {
 	}
 	
 	
-	public Cardapio getCardapio() {
-		return cardapio;
-	}
-
-
-	public void setCardapio(Cardapio cardapio) {
-		this.cardapio = cardapio;
-	}
+	
 
 
 	public String getCabecalho() {
@@ -50,6 +43,17 @@ public class DTOCardapioDetalhado implements Serializable {
 	}
 
 
+	
+	public Cardapio getCardapio() {
+		return cardapio;
+	}
+
+
+	public void setCardapio(Cardapio cardapio) {
+		this.cardapio = cardapio;
+	}
+	
+	
 	public List<DTOComposicaoCardapio> getListaComposicaoCardapio() {
 		return listaComposicaoCardapio;
 	}
