@@ -34,6 +34,7 @@ public class WSPostagem implements Serializable {
 	// defini a quantidade noticias que será mostradas ou listadas
 	private static final int qtdDeNoticias = 6;
 	private static final int idPostagemCardapio = 1301;
+	private static final int idPostagemPoliticaPrivacidade = 654;
 	private List<DTONoticia> listaNoticia = new ArrayList<DTONoticia>();
 
 	private DTOListaDeNoticia dtoListaDeNoticias = new DTOListaDeNoticia();
@@ -165,7 +166,7 @@ public class WSPostagem implements Serializable {
 	
 	
 	@GET
-	@Path("exibir-cardapio-do-dia")
+	@Path("exibir-politica-privacidade")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getExibirCardapioDoDia() throws WSTratamentoExcecaoGeral {
@@ -173,7 +174,7 @@ public class WSPostagem implements Serializable {
 		Postagem postagem;
 
 		try {
-			postagem = servicoPostagem.recuperarPorId(idPostagemCardapio);			
+			postagem = servicoPostagem.recuperarPorId(idPostagemPoliticaPrivacidade);			
 			
 			// String titulo = new String(postagem.getPostTitle(),"UTF-8");
 			String titulo = new String(postagem.getPostTitle(),"UTF-8");
