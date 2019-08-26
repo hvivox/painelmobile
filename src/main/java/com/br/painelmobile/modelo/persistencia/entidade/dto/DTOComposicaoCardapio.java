@@ -10,7 +10,7 @@ public class DTOComposicaoCardapio implements Serializable {
 	private static final long serialVersionUID = -8863989366948427335L;
 
 	private String opcao;
-	private String itens;
+	private List<String> itens;
 		
 	
 	public DTOComposicaoCardapio() {
@@ -28,12 +28,12 @@ public class DTOComposicaoCardapio implements Serializable {
 	}
 
 
-	public String getItens() {
+	public List getItens() {
 		return itens;
 	}
 
 
-	public void setItens(String itens) {
+	public void setItens(List itens) {
 		this.itens = itens;
 	}	
  

@@ -141,7 +141,7 @@ public class WSPostagem implements Serializable {
 				noticia.setUriImagem(definirUriImagem(conteudo));
 				noticia.setParteTexto(formatarParteDoTexto(conteudo));
 				//noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
-				noticia.setHtmlTexto(ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(conteudo));
+				noticia.setHtmlTexto( conteudo );
 				noticia.setCategoria(postagemComCategoria.getCategoria());
 				listaNoticia.add(noticia);
 

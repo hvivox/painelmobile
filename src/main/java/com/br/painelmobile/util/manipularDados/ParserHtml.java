@@ -198,7 +198,7 @@ public class ParserHtml {
 	 */
 	private static List<DTOComposicaoCardapio> listarOpcoesEItensDoCardapio(String htmlSemShortCode) {
 		Document doc;
-		String itens = "";
+		
 		List<DTOComposicaoCardapio> listaComposicaoCardapio = new ArrayList<DTOComposicaoCardapio>();
 		DTOComposicaoCardapio composicaoCardapio;
 		
@@ -208,13 +208,13 @@ public class ParserHtml {
 
 		for (Element painel : listaPainel) {
 			composicaoCardapio = new DTOComposicaoCardapio();
-			itens = "";
+			List<String> itens = new ArrayList<String>();
 			String opcao = painel.select("panel").attr("heading");
 
 			Elements listaDeItens = painel.select("li");
 			for (Element li : listaDeItens) {
-				itens += li.text() + "; ";
-
+				//itens += li.text() + "; ";
+				itens.add( li.text() );		
 			}
 			
 			composicaoCardapio.setOpcao(opcao);
