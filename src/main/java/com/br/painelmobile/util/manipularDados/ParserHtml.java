@@ -1,13 +1,13 @@
 package com.br.painelmobile.util.manipularDados;
 
 import java.io.FileInputStream;
-
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -148,7 +148,6 @@ public class ParserHtml {
 			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -179,8 +178,7 @@ public class ParserHtml {
 			
 			Elements children = element.select("li");
 			for (Element li : children) {
-				item += li.getElementsByTag("li").text()+"; " ;
-				
+				item += li.getElementsByTag("li").text()+"; " ;			
 				
 			}
 			
@@ -303,10 +301,12 @@ public class ParserHtml {
 		DTOCardapioDetalhado dtoCardapioDetalhado = new DTOCardapioDetalhado();
 		
 		//ALTERA O SHORTCODE DO HTML
+		List<DTOComposicaoCardapio> listaComposicaoCardapio = new ArrayList<DTOComposicaoCardapio>();
 		String htmlSemShortCode;
 		htmlSemShortCode = htmlFragmento.replaceAll("\\[", "<");
 		htmlSemShortCode = htmlSemShortCode.replaceAll("\\]", ">");		
 		
+		/*
 		String cabecalho = ObterCabecalhoCardapio(htmlSemShortCode);
 		String rodape = ObterRodapeCardapio(htmlSemShortCode);
 		List<DTOComposicaoCardapio> listaComposicaoCardapio = listarOpcoesEItensDoCardapio(htmlSemShortCode);
@@ -314,12 +314,79 @@ public class ParserHtml {
 		dtoCardapioDetalhado.setCabecalho(cabecalho);
 		dtoCardapioDetalhado.setRodape(rodape);
 		dtoCardapioDetalhado.setListaComposicaoCardapio(listaComposicaoCardapio);
-	
+	    */
+		
+		
+		Map<Integer, String> cabecalho_dataCardapio = ObterCabecalhoCardapio_E_dataCardapio(htmlSemShortCode);
+		String rodape = ObterRodapeCardapio(htmlSemShortCode);
+		List<DTOComposicaoCardapio> listaComposicaoCardapioEncontrado = listarOpcoesEItensDoCardapio(htmlSemShortCode);
+		
+		//acrescenta Data do cardapia a composição do cardapio
+		for (DTOComposicaoCardapio dtoComposicaoCardapio : listaComposicaoCardapioEncontrado) {
+			dtoComposicaoCardapio.setDataDoCardapio( cabecalho_dataCardapio.get(1) );
+			listaComposicaoCardapio.add(dtoComposicaoCardapio);
+		}
+				
+		dtoCardapioDetalhado.setCabecalho( cabecalho_dataCardapio.get(2) );				
+		dtoCardapioDetalhado.setRodape(rodape);	
+		dtoCardapioDetalhado.setListaComposicaoCardapio(listaComposicaoCardapio);
 		
 		return dtoCardapioDetalhado;
 		
 	}
 
+	
+	
+	
+	/**
+	  
+	 * @meth exibir cabelho do cardapio
+	 * @param htmlFragmento
+	 * @return
+	 */
+	private static Map<Integer, String> ObterCabecalhoCardapio_E_dataCardapio(String htmlSemShortCode) {
+		String cabecalhoCardapio = "";
+		String dataCardapio = "";
+		Document doc;		
+
+		doc = Jsoup.parseBodyFragment(htmlSemShortCode);// ler o fragmento do html
+		Elements listaDeRow = doc.select("row");
+		// TRANSFORMAR O ROW EM ELEMENTO, SÓ ASSIM ELE CHAMA O METODO
+		// previousElementSiblings()
+		for (Element row : listaDeRow) {
+			cabecalhoCardapio = "";
+			Elements ListaDetagsIrmaosQueEstaoAcimaDoRow = row.previousElementSiblings();
+
+			// inverte a ordem da lista
+			Collections.reverse(ListaDetagsIrmaosQueEstaoAcimaDoRow);
+			
+			for (Element tagIrmaoQueEstaoAcimaDoRow : ListaDetagsIrmaosQueEstaoAcimaDoRow) {
+				
+				//Localiza a data do cardapio que está dentro do cabeçalho
+				Elements listaDataCardapioComStrong = tagIrmaoQueEstaoAcimaDoRow.select("strong");				
+				for (Element dataCardapioEncontrado : listaDataCardapioComStrong) {					
+					dataCardapio += dataCardapioEncontrado.text();									
+				}				
+				
+				//Remove a data do cardapio de dentro do cabeçalho
+				tagIrmaoQueEstaoAcimaDoRow.select("strong").remove();	
+				
+				// Se o texto encontrado for diferente de vazio
+				if( !tagIrmaoQueEstaoAcimaDoRow.text().isEmpty() ) {
+					cabecalhoCardapio += tagIrmaoQueEstaoAcimaDoRow.text()+ "; ";
+				}
+				
+			}
+
+		}
+		
+		Map<Integer, String> map_Cabecalho_E_dataCardapio = new HashMap<Integer, String>();
+		map_Cabecalho_E_dataCardapio.put(1, dataCardapio);
+		map_Cabecalho_E_dataCardapio.put(2, cabecalhoCardapio);
+		
+		return map_Cabecalho_E_dataCardapio;
+	}
+	
 	
 	
 	
@@ -332,7 +399,7 @@ public class ParserHtml {
 		Document doc;
 		try {
 				
-			DTOCardapioDetalhado dtoCardapioDetalhado = obterInformacoesDoCardapioWordpress(htmlCardapio);
+			/*DTOCardapioDetalhado dtoCardapioDetalhado = obterInformacoesDoCardapioWordpress(htmlCardapio);
 			
 			System.out.println(dtoCardapioDetalhado.getCabecalho());
 			System.out.println(dtoCardapioDetalhado.getRodape());
@@ -344,11 +411,18 @@ public class ParserHtml {
 			
 			
 			String rodape = ObterRodapeCardapio(htmlCardapio);
-			System.out.println(rodape);
-
-			String cabecalho = ObterCabecalhoCardapio(htmlCardapio);
-			System.out.println(cabecalho);
-
+			System.out.println(rodape);*/
+			
+			
+			
+			//ALTERA O SHORTCODE DO HTML
+			String htmlSemShortCode;
+			htmlSemShortCode = htmlCardapio.replaceAll("\\[", "<");
+			htmlSemShortCode = htmlSemShortCode.replaceAll("\\]", ">");	
+			Map<Integer, String> map_Cabecalho_E_dataCardapio = ObterCabecalhoCardapio_E_dataCardapio(htmlSemShortCode);
+			
+			System.out.println(map_Cabecalho_E_dataCardapio.get(1) );
+			System.out.println(map_Cabecalho_E_dataCardapio.get(2) );	
 			
 			
 			
