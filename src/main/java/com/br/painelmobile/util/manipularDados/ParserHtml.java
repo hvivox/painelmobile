@@ -338,8 +338,7 @@ public class ParserHtml {
 	
 	
 	
-	/**
-	  
+	/**	  
 	 * @meth exibir cabelho do cardapio
 	 * @param htmlFragmento
 	 * @return

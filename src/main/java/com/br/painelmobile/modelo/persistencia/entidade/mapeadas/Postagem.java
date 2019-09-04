@@ -48,8 +48,7 @@ import javax.persistence.TemporalType;
 			"       wp_posts.post_status = 'publish' " + 
 			"        AND wp_posts.post_type = 'post' " + 
 			"        AND wp_term_taxonomy.taxonomy = 'category' " + 
-			"        AND wp_terms.Term_id in (42, 34, 35, 36, 37, 38, 39 )" + 			
-			"       HAVING wp_terms.name != '[Saiba Mais]' " + 
+			"        AND wp_terms.Term_id = 42 " +
 			"       ORDER BY" + 
 			"        post_date DESC limit 6" ,
 	resultSetMapping="postagemComCategoriaMapping"		
