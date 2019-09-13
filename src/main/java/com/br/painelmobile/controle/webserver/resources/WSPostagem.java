@@ -141,7 +141,8 @@ public class WSPostagem implements Serializable {
 				noticia.setUriImagem(definirUriImagem(conteudo));
 				noticia.setParteTexto(formatarParteDoTexto(conteudo));
 				//noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
-				noticia.setHtmlTexto( ParserHtml.removeTagImgdoHtml(conteudo) );
+				String conteudoComShortCodeCaption_ConvertidaParaHtml = ParserHtml.convertShortCodeEmHtml(conteudo);				
+				noticia.setHtmlTexto( ParserHtml.removeTagImgdoHtml( conteudoComShortCodeCaption_ConvertidaParaHtml ) );
 				
 				noticia.setCategoria(postagemComCategoria.getCategoria());
 				listaNoticia.add(noticia);
@@ -186,6 +187,7 @@ public class WSPostagem implements Serializable {
 			noticia.setLinkPublicacao( postagem.getGuid() );
 			noticia.setUriImagem(definirUriImagem(conteudo));
 			noticia.setParteTexto(formatarParteDoTexto(conteudo));
+			
 			noticia.setHtmlTexto(ParserHtml.removeTagImgdoHtml(conteudo));
 			
 			
@@ -202,8 +204,7 @@ public class WSPostagem implements Serializable {
 	}
 	
 	
-	
-	
+
 	
 	/**
 	 * Formatar texto para retirar html e reduzir o numero de caracteres para
@@ -214,6 +215,8 @@ public class WSPostagem implements Serializable {
 	 */
 	private String formatarParteDoTexto(String parteTexto) {
 		String textoProcessado = ParserHtml.converterHtmlEmTexto_RemoveTodasAsTags(parteTexto);
+		
+		//textoProcessado = ParserHtml.removerShortCodeCaptionDoTexto(textoProcessado);
 		//String textoProcessado = ParserHtml.converterHtmlEmTexto(parteTexto);
 		// caso o texto tenha menos que 200(nao retorna nulo) caracteres ou
 		// nenhum (_) o sistema irá tratar

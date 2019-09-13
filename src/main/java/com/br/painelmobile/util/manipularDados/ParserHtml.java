@@ -99,7 +99,24 @@ public class ParserHtml {
 
 		return doc.text();
 	}
-
+	
+	
+	/*ATUALMENTE ESTÁ CONVERTENDO APENAS A TAG CAPTION NO ENTANTO PARA CONVERTER 
+	 * OUTRAS TAGS É NECESS*/
+	public static String convertShortCodeEmHtml(String htmlFragmento) {
+		Document doc;
+		String htmlSemColchetes;
+		htmlSemColchetes = htmlFragmento.replaceAll("\\[", "<");
+		htmlSemColchetes = htmlSemColchetes.replaceAll("\\]", ">");
+		doc = Jsoup.parseBodyFragment(htmlSemColchetes);// ler o fragmento do html
+		
+		// String resultado = doc.select("container").attr("xclass");
+		//doc.select("caption").remove();		
+		
+		return doc.html();
+	}
+	
+	
 
 	/** Converte um fragmento com tag html em texto sem html
 	 * @param htmlFragmento: string com tag html
@@ -170,6 +187,7 @@ public class ParserHtml {
 		
 		// String resultado = doc.select("container").attr("xclass");
 		Elements resultado = doc.select("panel");
+		
 		for (Element element : resultado) {
 			String item = "";
 			String opcao = element.select("panel").attr("heading");			
