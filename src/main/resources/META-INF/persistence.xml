@@ -32,13 +32,11 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect" />
 <!-- 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/portalsescam?autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;verifyServerCertificate=false&amp;useSSL=false" /> -->
-<!-- 			<property name="javax.persistence.jdbc.user" value="root" /> -->
-<!-- 			<property name="javax.persistence.jdbc.password" value="sescdr@123" />		 -->
+<!-- 			<property name="javax.persistence.jdbc.user" value="teste" /> -->
+<!-- 			<property name="javax.persistence.jdbc.password" value="XXXXXXXXX" />		 -->
 			
 			
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.5.145:3306/portalsescam?autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;verifyServerCertificate=false&amp;useSSL=false" />
-			<property name="javax.persistence.jdbc.user" value="painelmobile"/>
-			<property name="javax.persistence.jdbc.password" value="pm#157" />		
+	
 			<!-- true or false. Setting which indicates whether or not the new IdentifierGenerator implementations are used for AUTO, TABLE -->
 			<!-- #and SEQUENCE. Default to false to keep backward compatibility. Faz com que cada um das classes tenham seus próprios contadores, caso contrario o sitema seguirá uma seguencia unica -->
 			<!-- <property name="hibernate.id.new_generator_mappings" value="true" /> -->

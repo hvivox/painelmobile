@@ -44,7 +44,7 @@ public class WSCardapio {
 	
 	
 	public WSCardapio() {
-
+		
 	}
 
 
@@ -95,6 +95,7 @@ public class WSCardapio {
 			
 			// busca a informacao do banco
 			cardapio = serviceCardapio.consultaUltimoRegistroAtivo();
+		
 			postagem = servicoPostagem.recuperarPorId(idPostagemCardapio);			
 
 			
@@ -110,7 +111,7 @@ public class WSCardapio {
 		} catch (Exception e) {
 			LogFactory.getLog(Logger.GLOBAL_LOGGER_NAME).warn(
 					e.getCause() + "\n Mensagem Erro: " + e.getMessage());
-
+			e.printStackTrace();
 			throw new WSTratamentoExcecaoGeral(
 					"{\"status\":\"400\",\"erro\":\"No momento não é possível exibir as notícias. Por favor tente novamente mais tarde\"}");
 		}

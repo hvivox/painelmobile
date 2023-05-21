@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,12 +60,21 @@ public class DaoCardapio extends	DataAccessObject<Cardapio> {
 	 * @return
 	 */
 	public Cardapio consultaUltimoRegistroAtivo(){		
-		String query = "from Cardapio c where "
-				+ " c.id = (select max(d.id) from Cardapio d where d.estatus = :estatus)";
-		Query q = getManager().createQuery(query);
-		q.setParameter("estatus", EstatusEntidadeEnum.ATIVO	);
-		return (Cardapio) q.getSingleResult();
-	}
-
+		Cardapio cadapio = new Cardapio();
+		try {
+			
+			String query = "from Cardapio c where "
+					+ " c.id = (select max(d.id) from Cardapio d where d.estatus = :estatus)";
+			Query q = getManager().createQuery(query);
+			q.setParameter("estatus", EstatusEntidadeEnum.ATIVO	);			
+			
+			return (Cardapio) q.getSingleResult();
+			
+		}catch(NoResultException e) {
+			//caso o resultado seja vazio será enviado um objeto vazio
+			return cadapio;
+		}	
+		
+	}	
 	
 }
