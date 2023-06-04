@@ -1,12 +1,30 @@
+# PAINEL-MOBILE
+Este repositório contém o projeto "painelmobile", que é uma API para integração de informações 
+entre um portal institucional e uma aplicação mobile. 
+O sistema também possui um sistema web integrado para cadastro de informações como eventos, parceiros e outros. 
+Foi desenvolvido em Java, JSF, PrimeFaces, CDI, Jersey e Jackson.
+
+| :placard: Vitrine.Dev |                                                                                                         |
+|-----------------------|---------------------------------------------------------------------------------------------------------|
+| :sparkles: Nome       | **painelmobile**                                                                                        |
+| :label: Tecnologias   | Java, JSF, PrimeFaces, CDI, Jersey e Jackson                                                            |
+| :rocket: URL          | https://localhost:8080/painelmobile                                                                     |
+| :fire: Desafio        | Atender a necessidade de uma empresa na integração entre portal institucional x api x aplicativo mobile |
+
+<!-- Inserir imagem com a #vitrinedev ao final do link -->
+![](https://github.com/hvivox/srealizacao-front/blob/main/capa-proejto.png?raw=true#vitrinedev)
+
+
+
+
+
+
 <p align="center">
 <a href="https://laravel.com" target="_blank">
 <img width="200" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" />
 </a>
 </p>
 
-# PAINELMOBILE
-
-Este repositório contém o projeto "painelmobile", que é uma API para integração de informações entre um portal institucional e uma aplicação mobile. O sistema também possui um sistema web integrado para cadastro de informações como eventos, parceiros e outros. Foi desenvolvido em Java, JSF, PrimeFaces, CDI, Jersey e Jackson.
 
 ## Requisitos do Sistema
 - Java
