@@ -14,17 +14,13 @@ Foi desenvolvido em Java, JSF, PrimeFaces, CDI, Jersey e Jackson.
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
 ![](https://github.com/hvivox/srealizacao-front/blob/main/capa-proejto.png?raw=true#vitrinedev)
 
-
-
-
-
-
+<!--  
 <p align="center">
 <a href="https://laravel.com" target="_blank">
 <img width="200" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original-wordmark.svg" />
 </a>
 </p>
-
+-->
 
 ## Requisitos do Sistema
 - Java
