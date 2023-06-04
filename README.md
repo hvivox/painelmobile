@@ -12,7 +12,7 @@ Foi desenvolvido em Java, JSF, PrimeFaces, CDI, Jersey e Jackson.
 | :fire: Desafio        | Atender a necessidade de uma empresa na integração entre portal institucional x api x aplicativo mobile |
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![](https://github.com/hvivox/srealizacao-front/blob/main/capa-proejto.png?raw=true#vitrinedev)
+![](https://github.com/hvivox/painelmobile/blob/main/painelmobile.png?raw=true#vitrinedev)
 
 <!--  
 <p align="center">
