@@ -6,7 +6,7 @@ Foi desenvolvido em Java, JSF, PrimeFaces, CDI, Jersey e Jackson.
 
 | :placard: Vitrine.Dev |                                                                                                         |
 |-----------------------|---------------------------------------------------------------------------------------------------------|
-| :sparkles: Nome       | **painel mobile**                                                                                        |
+| :sparkles: Nome       | **painel-mobile | api de integração entre App-Mobile e Portal Institucional**                                                                                        |
 | :label: Tecnologias   | Java, JSF, PrimeFaces, CDI, Jersey e Jackson                                                            |
 | :rocket: URL          | https://localhost:8080/painelmobile                                                                     |
 | :fire: Desafio        | Atender a necessidade de uma empresa na integração entre portal institucional x api x aplicativo mobile |
